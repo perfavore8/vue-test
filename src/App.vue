@@ -1,54 +1,85 @@
 <template>
-    <div>
+    <div @submit.prevent="onSubmit">
         <label for="surname">Фамилия</label>
-        <input type="text" name="surname" id="surname">
+        <input type="text" v-model="surname" name="surname" id="surname" :class="{invalid: ($v.surname.$dirty && !$v.surname.required)}">
         <label for="name">Имя</label>
-        <input type="text" name="name" id="name">
+        <input type="text" v-model="name" name="name" id="name">
         <label for="lastname">Отчество</label>
-        <input type="text" name="lastname" id="lastname">
-        <label for="birthday">Дата родов</label>
-        <input type="date" name="birthday" id="birthday">
+        <input type="text" v-model="lastname" name="lastname" id="lastname">
+        <label for="birthday">Дата рожения</label>
+        <input type="date" v-model="birthday" name="birthday" id="birthday">
         <label for="phone">Номер телефона</label>
-        <input type="tel" name="phone" id="phone">
+        <input type="tel" v-model="phone" name="phone" id="phone">
         <label for="gender">Пол</label>
-        <input type='radio' name='gender' id="male" value="male"><span>Male</span>
-        <input type='radio' name='gender' id="female" value="female"><span>Female</span>
+        <input type='radio' v-model="gender" name='gender' id="male" value="male"><span>Мужской</span>
+        <input type='radio' v-model="gender" name='gender' id="female" value="female"><span>Женский</span>
         <label for="group">Группа клиентов</label>
-        <select multiple name="group" id="group">
-            <option>Grumpy</option>
-            <option>Happy</option>
-            <option>Sleepy</option>
-            <option>Bashful</option>
-            <option>Sneezy</option>
-            <option>Dopey</option>
-            <option>Doc</option>
+        <select v-model="group" multiple name="group" id="group">
+            <option>VIP</option>
+            <option>Проблемные</option>
+            <option>ОМС</option>
         </select>
         <label for="doc">Лечащий врач</label>
-        <select name="doc" id="doc">
+        <select v-model="doc" name="doc" id="doc">
             <option>Иванов</option>
             <option>Захаров</option>
             <option>Чернышева</option>
         </select>
         <label for="sms">Не отправлять СМС</label>
-        <input type="checkbox" name="sms" id="sms" checked>
+        <input v-model="sms" type="checkbox" name="sms" id="sms" checked>
+
+        <button @click="commit">Отправить</button>
     </div>
 </template>
 
-<script>
+<script type="text/javascript">
+import Vue from 'vue'
+import {required, numeric} from '@vuelidate/validators'
+
 export default {
     data() {
         return { 
-            likes:0,
-            dislikes:0,
+            surname: null,
+            name: null,
+            lastname: null,
+            birthday: undefined,
+            phone: null,
+            gender: null,
+            group: '',
+            doc: '',
+            sms: null,
         }
     },
 
+    validations: {
+        surname: {required},
+        name: {required},
+        lastname: {required},
+        birthday: {required},
+        phone: {required, numeric},
+        gender: {required},
+        group: {required},
+        doc: {required},
+
+    },
+
     methods: {
-        addLike() {
-            this.likes += 1;
+        commit() {
+            console.log(this.surname);
+            console.log(this.name);
+            console.log(this.lastname);
+            console.log(this.birthday);
+            console.log(this.phone);
+            console.log(this.gender);
+            console.log(this.group);
+            console.log(this.doc);
+            console.log(this.sms);
         },
-        addDislike() {
-            this.dislikes += 1;
+        onSubmit() {
+            if (this.$v.$invalid) {
+                this.$v.$touch()
+                return
+            }
         }
     }
 }
