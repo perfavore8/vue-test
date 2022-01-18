@@ -18,8 +18,10 @@
         />
     </div>
     <div class="column">
-        <label for="city">Город</label>
-        <input class="input" type="text" v-model="modelValue.city" name="city" id="city" :class="{ invalid: validationStatus.city.$error}">
+        <!-- <div class="column"> -->
+            <label for="city">Город</label>
+            <input class="input" type="text" v-model="modelValue.city" name="city" id="city" :class="{ invalid: validationStatus.city.$error}">
+            <small for='city' v-if="validationStatus.city.$error">* Обязательное поле</small>
         <labeled-input
             id="street"
             name="street"

@@ -86,8 +86,12 @@ export default {
     methods: {
         onSubmit() {
             this.v$.$validate()
+            console.log(this.v$.state.$error)
             console.table(this.state.user)
-            console.table(this.state.address)            
+            console.table(this.state.address)   
+            console.table(this.state.document)         
+            if(this.v$.state.$error) return
+                alert('Новый клиент успешно создан')   
         }
     }
 }

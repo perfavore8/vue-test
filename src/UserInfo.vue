@@ -3,8 +3,10 @@
         <div class="column">
             <label for="surname">Фамилия</label>
             <input class="input" type="text" v-model="modelValue.surname" name="surname" id="surname" :class="{ invalid: validationStatus.surname.$error}">
+            <small for='surname' v-if="validationStatus.surname.$error">* Обязательное поле</small>
             <label for="name">Имя</label>
             <input class="input" type="text" v-model="modelValue.name" name="name" id="name" :class="{ invalid: validationStatus.name.$error}">
+            <small for='name' v-if="validationStatus.name.$error">* Обязательное поле</small>          
             <labeled-input 
                 id="lastname"
                 name="lastname"
@@ -14,8 +16,11 @@
         <div class="column">
             <label for="birthday">Дата рожения</label>
             <input class="input" type="date" v-model="modelValue.birthday" name="birthday" id="birthday" :class="{ invalid: validationStatus.birthday.$error}">
+            <small for='birthday' v-if="validationStatus.birthday.$error">* Обязательное поле</small> 
             <label for="phone">Номер телефона</label>
-            <input class="input" type="tel" v-model="modelValue.phone" name="phone" id="phone" :class="{invalid: (validationStatus.phone.$error) || (!validationStatus.phone.numeric)}">
+            <input class="input" type="tel" v-model="modelValue.phone" name="phone" id="phone" :class="{invalid: validationStatus.phone.$error}">
+            <small for='phone' v-if="validationStatus.phone.$error">*Номер должен начинаться с 7</small>    
+            <small for='phone' v-if="validationStatus.phone.$error">* Обязательное поле</small>          
             <label for="gender">Пол</label>
             <div class="gender_wrapper">
                 <input class="input" type='radio' v-model="modelValue.gender" name='gender' id="male" value="male"><span>М</span>
@@ -31,6 +36,7 @@
                 <option>Проблемные</option>
                 <option>ОМС</option>
             </select>
+            <small for='group' v-if="validationStatus.group.$error">* Обязательное поле</small> 
         </div>
         <div class="column --align-items-start">
             <label for="doc">Лечащий врач</label>

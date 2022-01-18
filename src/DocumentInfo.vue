@@ -7,6 +7,7 @@
                 <option>Вод. удостоверение</option>
                 <option>Вод. удостоверение</option>
             </select>
+            <small for='type' v-if="validationStatus.type.$error">* Обязательное поле</small>
         <labeled-input 
             id="series"
             name="series"
@@ -26,6 +27,7 @@
         />
         <label for="dateIssue">Дата выдачи</label>
         <input class="input" type="date" v-model="modelValue.dateIssue" name="dateIssue" id="dateIssue" :class="{ invalid: validationStatus.dateIssue.$error}">
+        <small for='dateIssue' v-if="validationStatus.dateIssue.$error">* Обязательное поле</small> 
     </div>
 </div>
 </template>
