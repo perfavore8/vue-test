@@ -6,7 +6,6 @@
         @input="handleInput"
         :name="name"
         :id="id"
-        :class="{invalid: valid.$error}"
     >
 </template>
 
@@ -14,7 +13,7 @@
 export default {
     name: 'labeled-input',
     emits: ['update:modelValue'],
-    props: ['name', 'id', 'modelValue', 'label', 'valid'],
+    props: ['name', 'id', 'modelValue', 'label'],
 
     methods: {
         handleInput(e) {
